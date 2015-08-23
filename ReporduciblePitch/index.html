@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>mtcars Dataset Analysis</title>
+  <meta charset="utf-8">
+  <meta name="description" content="mtcars Dataset Analysis">
+  <meta name="author" content="Yisong Tao">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>mtcars Dataset Analysis</h1>
+    <h2>Developing Data Product Course Project</h2>
+    <p>Yisong Tao<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Purpose of this app</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>This app is developed for Developing Data Products Course Project.</li>
+<li>The app uses <code>mtcars</code> dataset in R <code>datasets</code> package, plots individual variables vs. Miles per Gallon (mpg) and demonstrates single variable regression model using mpg as outcome.</li>
+<li>The app is here: <em><a href="https://yisongtao.shinyapps.io/DevelopingDataProducts">https://yisongtao.shinyapps.io/DevelopingDataProducts</a></em></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>mtcars Dataset</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).</li>
+<li>The dataset is included in R &#39;datasets&#39; package.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>mtcars Dataset</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Variables in the dataset</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Index</th>
+<th>Field</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>[, 1]</td>
+<td>mpg</td>
+<td>Miles per Gallon</td>
+</tr>
+<tr>
+<td>[, 2]</td>
+<td>cyl</td>
+<td>Number of Cylinders</td>
+</tr>
+<tr>
+<td>[, 3]</td>
+<td>disp</td>
+<td>Displacement (cu.in.)</td>
+</tr>
+<tr>
+<td>[, 4]</td>
+<td>hp</td>
+<td>Horsepower</td>
+</tr>
+<tr>
+<td>[, 5]</td>
+<td>drat</td>
+<td>Rear Axle Ratio</td>
+</tr>
+<tr>
+<td>[, 6]</td>
+<td>wt</td>
+<td>Weight (lb/1000)</td>
+</tr>
+<tr>
+<td>[, 7]</td>
+<td>qsec</td>
+<td>1/4 mile time</td>
+</tr>
+<tr>
+<td>[, 8]</td>
+<td>vs</td>
+<td>V/S</td>
+</tr>
+<tr>
+<td>[, 9]</td>
+<td>am</td>
+<td>Transmission (0 = automatic, 1 = manual)</td>
+</tr>
+<tr>
+<td>[,10]</td>
+<td>gear</td>
+<td>Number of forward gears</td>
+</tr>
+<tr>
+<td>[,11]</td>
+<td>carb</td>
+<td>Number of carburetors</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Analysis Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>    formulaTextPoint &lt;- reactive({
+        paste(&quot;mpg ~&quot;, &quot;as.numeric(&quot;, input$variable, &quot;)&quot;)
+    })
+    fit &lt;- reactive({
+        lm(formulaText(), data=mtcars)
+    })
+    output$fitPlot &lt;- renderPlot({
+        with(mtcars, {
+            plot(as.formula(formulaTextPoint()), xlab = formulaText(),
+                 ylab = &quot;Miles per Gallon&quot;,)
+            abline(fit(), col=2)
+        })
+    })
+</code></pre>
+
+<ul>
+<li>Code on Github: <em><a href="https://github.com/yisongtao/DevelopingDataProducts">https://github.com/yisongtao/DevelopingDataProducts</a></em></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Purpose of this app'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='mtcars Dataset'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='mtcars Dataset'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Analysis Code'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
