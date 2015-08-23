@@ -46,21 +46,17 @@ knit        : slidify::knit2slides
 
 ---
 
-## Analysis Code
+## Analysis Code Example
+
+```r
+    library(datasets)
+    data(mtcars)
+    fit <- lm(mpg ~ wt, data=mtcars)
+    plot(mpg ~ wt, xlab = "Weight (lb/1000)",
+    ylab = "Miles per Gallon", data = mtcars)
+    abline(fit, col=2)
 ```
-    formulaTextPoint <- reactive({
-        paste("mpg ~", "as.numeric(", input$variable, ")")
-    })
-    fit <- reactive({
-        lm(formulaText(), data=mtcars)
-    })
-    output$fitPlot <- renderPlot({
-        with(mtcars, {
-            plot(as.formula(formulaTextPoint()), xlab = formulaText(),
-                 ylab = "Miles per Gallon",)
-            abline(fit(), col=2)
-        })
-    })
-```
+
+![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1-1.png) 
 
 - Code on Github: *https://github.com/yisongtao/DevelopingDataProducts*

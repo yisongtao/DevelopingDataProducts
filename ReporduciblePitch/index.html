@@ -149,23 +149,18 @@
 
 <slide class="" id="slide-4" style="background:;">
   <hgroup>
-    <h2>Analysis Code</h2>
+    <h2>Analysis Code Example</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code>    formulaTextPoint &lt;- reactive({
-        paste(&quot;mpg ~&quot;, &quot;as.numeric(&quot;, input$variable, &quot;)&quot;)
-    })
-    fit &lt;- reactive({
-        lm(formulaText(), data=mtcars)
-    })
-    output$fitPlot &lt;- renderPlot({
-        with(mtcars, {
-            plot(as.formula(formulaTextPoint()), xlab = formulaText(),
-                 ylab = &quot;Miles per Gallon&quot;,)
-            abline(fit(), col=2)
-        })
-    })
+    <pre><code class="r">    library(datasets)
+    data(mtcars)
+    fit &lt;- lm(mpg ~ wt, data=mtcars)
+    plot(mpg ~ wt, xlab = &quot;Weight (lb/1000)&quot;,
+    ylab = &quot;Miles per Gallon&quot;, data = mtcars)
+    abline(fit, col=2)
 </code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1"> </p>
 
 <ul>
 <li>Code on Github: <em><a href="https://github.com/yisongtao/DevelopingDataProducts">https://github.com/yisongtao/DevelopingDataProducts</a></em></li>
@@ -199,7 +194,7 @@
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Analysis Code'>
+        data-slide=4 title='Analysis Code Example'>
          4
       </a>
     </li>
