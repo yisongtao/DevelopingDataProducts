@@ -1,8 +1,8 @@
 library(shiny)
 library(datasets)
 
-mpgData <- mtcars
-mpgData$am <- factor(mpgData$am, labels = c("Automatic", "Manual"))
+data(mtcars)
+mtcars$am <- factor(mtcars$am, labels = c("Automatic", "Manual"))
 
 shinyServer(function(input, output) {
     
@@ -11,11 +11,11 @@ shinyServer(function(input, output) {
     })
     
     formulaTextPoint <- reactive({
-        paste("mpg ~", "as.integer(", input$variable, ")")
+        paste("mpg ~", "as.numeric(", input$variable, ")")
     })
     
     fit <- reactive({
-        lm(as.formula(formulaTextPoint()), data=mpgData)
+        lm(formulaText(), data=mtcars)
     })
     
     output$caption <- renderText({
@@ -24,7 +24,9 @@ shinyServer(function(input, output) {
     
     output$mpgBoxPlot <- renderPlot({
         boxplot(as.formula(formulaText()), 
-                data = mpgData,
+                data = mtcars,
+                xlab = formulaText(),
+                ylab = "Miles per Gallon",
                 outline = input$outliers)
     })
     
@@ -32,9 +34,11 @@ shinyServer(function(input, output) {
         summary(fit())
     })
     
-    output$mpgPlot <- renderPlot({
-        with(mpgData, {
-            plot(as.formula(formulaTextPoint()))
+    output$fitPlot <- renderPlot({
+        with(mtcars, {
+            plot(as.formula(formulaTextPoint()), 
+                 xlab = formulaText(),
+                 ylab = "Miles per Gallon",)
             abline(fit(), col=2)
         })
     })
