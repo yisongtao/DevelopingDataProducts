@@ -67,7 +67,7 @@ shinyUI(
                         p("Code on github"),
                         a("https://github.com/yisongtao/DevelopingDataProducts"),
                         p("More analysis of the dataset from Regression Model Course on github"),
-                        a("https://github.com/yisongtao/RegrssionModel/blob/master/RegressionModel_CourseProject.html")
+                        a("http://yisongtao.github.io/RegressionModel_CourseProject.html")
                )
     )
 )

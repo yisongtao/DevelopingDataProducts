@@ -1,8 +1,8 @@
 name: DevelopingDataProducts
 account: yisongtao
 server: shinyapps.io
-bundleId: 249028
+bundleId: 251071
 url: https://yisongtao.shinyapps.io/DevelopingDataProducts
-when: 1440353933.9579
+when: 1440434555.86111
 asMultiple: FALSE
 asStatic: FALSE
